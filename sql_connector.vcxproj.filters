@@ -30,6 +30,12 @@
     <ClCompile Include="utils\utils.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="utils\window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="router\router.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="service\headers\connection.h">
@@ -48,6 +54,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="headers\utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\router.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

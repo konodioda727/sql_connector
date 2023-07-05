@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;D:\boost_1_82_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\MySQL\MySQL Server 8.0\lib;D:\boost_1_82_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\MySQL\MySQL Server 8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\MySQL\MySQL Server 8.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,7 +113,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\boost_1_82_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,15 +135,19 @@
   <ItemGroup>
     <ClCompile Include="controller\controller.cpp" />
     <ClCompile Include="index.cpp" />
+    <ClCompile Include="router\router.cpp" />
     <ClCompile Include="service\services.cpp" />
     <ClCompile Include="utils\geneStr.cpp" />
     <ClCompile Include="utils\utils.cpp" />
+    <ClCompile Include="utils\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\controller.h" />
     <ClInclude Include="headers\geneStr.h" />
+    <ClInclude Include="headers\router.h" />
     <ClInclude Include="headers\servicess.h" />
     <ClInclude Include="headers\utils.h" />
+    <ClInclude Include="headers\window.h" />
     <ClInclude Include="service\headers\connection.h" />
     <ClInclude Include="service\headers\method.h" />
   </ItemGroup>

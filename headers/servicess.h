@@ -13,6 +13,7 @@ void FreeResult(MYSQL_RES* result);
 unsigned long long getLastInsertId(MYSQL* conn);
 char* getValueFromTable(MYSQL* conn, const char* query, const char* fieldName);
 int getid(MYSQL* conn, const char* table, const char* field);
+int emptyornot(MYSQL* conn, const char* query);
 
 MYSQL_RES* Select(MYSQL* conn, const char query[]);
 void SelectPrint(MYSQL* conn, const char query[]);

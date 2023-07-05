@@ -23,14 +23,11 @@ MYSQL* CreateConnection(const char* basename) {
 int Query(MYSQL* conn, const char query[]) {
     int status = mysql_query(conn, query);
     if (status == 0) {
-        printf("\nQuery Success\n");
-        int affected_rows = mysql_affected_rows(conn);
-        if (affected_rows != -1)
-            printf("Affected %d rows\n", affected_rows);
         return 1;
     }
     printf("\nERR SENTENCE: %s\n", query);
     printf("\nERR: FAILED TO EXCUTE QUERY\n");
+    
     return 0;
 }
 void ReadRow(MYSQL_RES* result) {
@@ -49,6 +46,7 @@ void ReadRow(MYSQL_RES* result) {
             }
             printf("\n");
         }
+        mysql_free_result(result);
     }
     else
         printf("\nERR: RESULT IS EMPTY\n");
@@ -100,6 +98,26 @@ int getid(MYSQL* conn, const char* table, const char* field) {
     const char* res = getValueFromTable(conn, str, field);
     int ret = atoi(res) + 1;
     return ret;
+}
+int emptyornot(MYSQL* conn, const char* query) {
+    if (mysql_query(conn, query) == 0) {
+        MYSQL_RES* result = mysql_store_result(conn);
+        if (result != NULL) {
+            // 获取查询结果成功
+
+            // 获取结果集中的行数
+            unsigned long num_rows = mysql_num_rows(result);
+
+            if (num_rows > 0) {
+                return 1;
+            }
+
+            // 释放结果集
+            mysql_free_result(result);
+        }
+        
+    }
+    return 0;
 }
 
 MYSQL_RES* Select(MYSQL* conn, const char query[]) {

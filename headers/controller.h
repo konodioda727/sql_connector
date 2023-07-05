@@ -6,6 +6,12 @@
 #include "servicess.h"
 
 void DaySelling(MYSQL* conn);
-void Customer(MYSQL* conn);
+void Shopping(MYSQL* conn);
+void ProductSelling(MYSQL* conn);
+void InsertStock(MYSQL* conn,int* num);
+void EditingStock(MYSQL* conn);
+void DeleteShoppingCart(MYSQL* conn, int id);
+void OrderPrintAll(MYSQL* conn);
+void OrderPrintOne(MYSQL* conn, char* query);
 
 #endif // !CONTROLLER_H
