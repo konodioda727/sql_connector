@@ -133,15 +133,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="controller\controller.cpp" />
     <ClCompile Include="index.cpp" />
     <ClCompile Include="service\services.cpp" />
-    <ClCompile Include="utils\add.cpp" />
     <ClCompile Include="utils\geneStr.cpp" />
+    <ClCompile Include="utils\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\add.h" />
+    <ClInclude Include="headers\controller.h" />
     <ClInclude Include="headers\geneStr.h" />
     <ClInclude Include="headers\servicess.h" />
+    <ClInclude Include="headers\utils.h" />
     <ClInclude Include="service\headers\connection.h" />
     <ClInclude Include="service\headers\method.h" />
   </ItemGroup>

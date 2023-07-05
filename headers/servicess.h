@@ -2,12 +2,17 @@
 #ifndef SERVICESS_H
 #define SERVICESS_H
 
-#include "add.h"
+#include "utils.h"
+#include "mysql.h" 
+
 
 MYSQL* CreateConnection(const char* basename);
 int Query(MYSQL* conn, const char query[]);
 void ReadRow(MYSQL_RES* result);
 void FreeResult(MYSQL_RES* result);
+unsigned long long getLastInsertId(MYSQL* conn);
+char* getValueFromTable(MYSQL* conn, const char* query, const char* fieldName);
+int getid(MYSQL* conn, const char* table, const char* field);
 
 MYSQL_RES* Select(MYSQL* conn, const char query[]);
 void SelectPrint(MYSQL* conn, const char query[]);

@@ -53,9 +53,53 @@ void ReadRow(MYSQL_RES* result) {
     else
         printf("\nERR: RESULT IS EMPTY\n");
 }
+char* getValueFromTable(MYSQL* conn, const char* query, const char* fieldName) {
+
+    if (mysql_query(conn, query) != 0) {
+        printf("MySQL query failed: %s\n", mysql_error(conn));
+        return NULL;
+    }
+
+    MYSQL_RES* result = mysql_store_result(conn);
+    if (result == NULL) {
+        printf("MySQL result retrieval failed: %s\n", mysql_error(conn));
+        return NULL;
+    }
+
+    MYSQL_ROW row = mysql_fetch_row(result);
+    if (row == NULL) {
+        printf("No data found.\n");
+        mysql_free_result(result);
+        return NULL;
+    }
+
+    char* value = _strdup(row[0]);
+
+    mysql_free_result(result);
+
+    return value;
+}
 void FreeResult(MYSQL_RES* result) {
     mysql_free_result(result);
     printf("\nFREED RESULT SUCCESSFULLY\n");
+}
+unsigned long long getLastInsertId(MYSQL* conn) {
+    unsigned long long lastInsertId = 0;
+    mysql_query(conn, "SELECT LAST_INSERT_ID();");
+    MYSQL_RES* result = mysql_store_result(conn);
+    MYSQL_ROW row = mysql_fetch_row(result);
+    if (row != NULL) {
+        lastInsertId = strtoull(row[0], NULL, 10);
+    }
+    mysql_free_result(result);
+    return lastInsertId;
+}
+int getid(MYSQL* conn, const char* table, const char* field) {
+    char str[80];
+    sprintf(str, "SELECT MAX(%s) FROM %s", field, table);
+    const char* res = getValueFromTable(conn, str, field);
+    int ret = atoi(res) + 1;
+    return ret;
 }
 
 MYSQL_RES* Select(MYSQL* conn, const char query[]) {
@@ -71,7 +115,7 @@ MYSQL_RES* Select(MYSQL* conn, const char query[]) {
 void SelectPrint(MYSQL* conn, const char query[]) {
     MYSQL_RES* result = Select(conn, query);
     ReadRow(result);
-    FreeResult(result);
+    //FreeResult(result);
 }
 void Delete(MYSQL* conn, const char table[], const char query[]) {
     char str[50] = "DELETE FROM";
@@ -96,7 +140,3 @@ void Update(MYSQL* conn, const char table[], const char value_set[], const char 
     Query(conn, str);
 }
 
-void UserPayment(MYSQL* conn) {
-    printf("select types");
-    scanf("%s");
-}

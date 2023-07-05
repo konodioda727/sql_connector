@@ -1,12 +1,16 @@
 #include "../headers/geneStr.h"
+#include "../headers/utils.h"
 
-char* DaySelling(const char* rows[], const char* function) {
+char* DaySelling(const char* rows[], const char* functions[]) {
     char str[300] = "";
     AddTab(str, "SELECT", rows);
-    strcat(str, ",");
-    AddTab(str, function);
-    AddTab(str, "FROM", "order_items");
-    AddTab(str, "JOIN orders ON order_items.order_id = orders.order_id");
+    AddTab(str,",", functions);
+    AddTab(str, "FROM", "orders");
     AddTab(str, "GROUP BY", rows);
+    return str;
+}
+char* Product(const char* product_id, const char* product_row, char* string) {
+    char* str = string;
+    sprintf(str, "SELECT %s FROM products WHERE product_id=%s;", product_row, product_id);
     return str;
 }
