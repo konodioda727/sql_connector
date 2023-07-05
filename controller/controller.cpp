@@ -139,9 +139,9 @@ void InsertStock(MYSQL* conn,int* num) {
     }
 }
 void OrderPrintAll(MYSQL* conn) {
-    SelectPrint(conn,"SELECT * FROM orders JOIN products ON products.product_id = orders.product_id");
+    SelectPrint(conn,"SELECT * FROM products ");
 }
 void OrderPrintOne(MYSQL* conn, char* query) {
     PrintOne(query);
-    SelectPrint();
+    SelectPrint(conn,query);
 }

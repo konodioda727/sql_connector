@@ -18,9 +18,10 @@ int main() {
 	// 从购物车删除
 	//DeleteShoppingCart(conn, 1);
 	// 购物
-	Shopping(conn);
+	//Shopping(conn);
 	// 修改库存
 	//EditingStock(conn);
+	OrderPrintAll(conn);
 	mysql_close(conn);
 }
 

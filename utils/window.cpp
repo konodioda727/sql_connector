@@ -40,7 +40,7 @@ void Shopping_Cart(int *order_item_id) {
 }
 int DeleteShopping_Cart() {
     int tmp = 0;
-    printf("want to delete from shopping cart? (press 1 to delete)");
+    printf("want to delete from shopping cart? (press 1 to delete): ");
     scanf("%d", &tmp);
     if (tmp != 1 ) {
         return 0;
