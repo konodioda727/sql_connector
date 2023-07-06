@@ -3,7 +3,6 @@
 #include "../headers/utils.h"
 #include "../headers/window.h"
 
-
 void Shopping(MYSQL* conn) {
     MYSQL* row;
     char product_id[20] = "1", query[200] = "", query2[200] = "";
@@ -143,5 +142,6 @@ void OrderPrintAll(MYSQL* conn) {
 }
 void OrderPrintOne(MYSQL* conn, char* query) {
     PrintOne(query);
-    SelectPrint(conn,query);
+    SelectPrint(conn, query);
 }
+
