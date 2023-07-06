@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string.h>
+#include <stdarg.h>
 #include <time.h>
 
 void getTime(char* timeString);
