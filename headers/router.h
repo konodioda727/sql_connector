@@ -21,5 +21,8 @@ void ReadData(MYSQL* conn, const char* table, char(*name)[100], char(*phone)[100
 int CheckInput(MYSQL* conn, char(*name)[100], char(*phone)[100], int index, char* input_name, char* input_phone);
 // 顾客界面
 void customerPage(MYSQL* conn);
+// 调用格式：提示用户输入的目录，选项个数，使用每个选项要输入的int值
+// E.G. NewSwitch("Please enter a number:\n 1.ali\n 2.bite\n 3.code\n 4.docker", 4, 1, 2, 3, 4);
+int NewSwitch(const char* str, int count, ...);
 
 #endif // !CONTROLLER_H
