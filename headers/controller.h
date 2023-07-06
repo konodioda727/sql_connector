@@ -4,6 +4,7 @@
 
 #include "geneStr.h"
 #include "servicess.h"
+#include "utils.h"
 
 void DaySelling(MYSQL* conn);
 void Shopping(MYSQL* conn);
