@@ -231,45 +231,44 @@ int isInList(int num, int count, va_list args) {
 	return 0; // 如果输入的整数和可变参数列表中的所有整数都不相等，返回0
 }
 
-// 定义一个函数，该函数接受一个字符串和数量不定的整形数字，该函数将先输出接受的字符串，
+// 定义一个函数，该函数接受一个字符串，可变参数个数和一个可变参数列表，该函数将先输出接受的字符串，
 // 然后等待用户输入整形数字，
-// 若用户输入的值不是整形数字或者不是传入整形数字的其中一个，则打印“输入格式错误”，并递归调用自己要求用户再次输入，
-// 若成功则返回用户输入的整形数
+// 若用户输入的值不是整形数字或者不是传入整形数字的其中一个，则打印“输入格式错误”，并要求用户再次输入（不要使用递归），
+// 若成功则返回用户输入的整形数，依次类推
 int NewSwitch(const char* str, int count, ...) {
 	printf("%s", str); // 输出接受的字符串
 
 	char buffer[1024]; // 定义一个缓冲区，用于存储用户输入的字符串
 	fgets(buffer, sizeof(buffer), stdin); // 使用fgets函数读取用户输入的字符串，并存储到缓冲区中
-
-	if (!isInteger(buffer)) { // 如果用户输入的值不是整数
-		PrintfInMiddle("输入格式错误\n"); // 打印“输入格式错误”
-		va_list args; // 定义一个可变参数列表
-		va_start(args, count); // 初始化可变参数列表
-		int result = NewSwitch(str, count, args); // 递归调用自己要求用户再次输入，并获取返回值
-		va_end(args); // 结束可变参数列表
-		return result; // 返回递归调用的结果
-	}
-
-	int num = atoi(buffer); // 将用户输入的字符串转换为整数
+	buffer[strcspn(buffer, "\n")] = '\0'; // 去掉buffer中的'\n'字符
 
 	va_list args; // 定义一个可变参数列表
 	va_start(args, count); // 初始化可变参数列表
 
-	if (!isInList(num, count, args)) { // 如果用户输入的值不是传入整形数字的其中一个
-		PrintfInMiddle("输入格式错误\n"); // 打印“输入格式错误”
-		int result = NewSwitch(str, count, args); // 递归调用自己要求用户再次输入，并获取返回值
-		va_end(args); // 结束可变参数列表
-		return result; // 返回递归调用的结果
+	while (!isInteger(buffer) || !isInList(atoi(buffer), count, args)) { // 如果用户输入的值不是整数或者不是传入整形数字的其中一个
+		printf("输入格式错误\n"); // 打印“输入格式错误”
+		printf("%s", str); // 输出接受的字符串
+		fgets(buffer, sizeof(buffer), stdin); // 使用fgets函数读取用户输入的字符串，并存储到缓冲区中
+		buffer[strcspn(buffer, "\n")] = '\0'; // 去掉buffer中的'\n'字符
+
+		va_list args_copy; // 定义一个新的可变参数列表
+		va_copy(args_copy, args); // 使用va_copy宏复制原来的可变参数列表
+		va_end(args); // 结束原来的可变参数列表
+
+		args = args_copy; // 将新的可变参数列表赋值给args
 	}
+
+	int num = atoi(buffer); // 将用户输入的字符串转换为整数
 
 	va_end(args); // 结束可变参数列表
 
 	return num; // 返回用户输入的整数
 }
 
+
 void customerPage(MYSQL* conn) {
 	// 等待一秒
-	Sleep(2000);
+	Sleep(1000);
 	// 清空控制台
 	system("cls");
 	PrintfWrap("Costomer Mode");
