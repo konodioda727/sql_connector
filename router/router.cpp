@@ -1,6 +1,10 @@
 #include "../headers/router.h"
-void customerPage() {
-
+void customerPage(MYSQL* conn) {
+    // 等待一秒
+    Sleep(2000);
+    // 清空控制台
+    system("cls");
+    PrintfWrap("Costomer Mode");
 }
 
 //测试函数
@@ -61,10 +65,10 @@ int SysLogin(MYSQL* conn) {
 
     while (result != 0) {
         if (result == -1) {
-            printf("不存在此账户，请重新输入。\n");
+            PrintfInMiddle("不存在此账户，请重新输入。\n");
         }
         else if (result == -2) {
-            printf("密码错误，请重新输入。\n");
+            PrintfInMiddle("密码错误，请重新输入。\n");
         }
         printf("请输入您的账户名：\n");
         fflush(stdin);
@@ -88,11 +92,11 @@ int SysLogin(MYSQL* conn) {
             }
         }
         if (is_employee != -1) {
-            printf("欢迎管理员 %s 登录系统。\n", input_name);
+            PrintfWrap("欢迎管理员 %s 登录系统。", input_name);
             return 2;
         }
         else {
-            printf("欢迎用户 %s 登录系统。\n", input_name);
+            PrintfWrap("欢迎用户 %s 登录系统。", input_name);
             return 1;
         }
     }

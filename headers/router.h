@@ -19,5 +19,7 @@ void PrintfInMiddle(const char* format, ...);
 void ReadData(MYSQL* conn, const char* table, char(*name)[100], char(*phone)[100]);
 // 判断用户输入的name和phone是否正确的函数
 int CheckInput(MYSQL* conn, char(*name)[100], char(*phone)[100], int index, char* input_name, char* input_phone);
+// 顾客界面
+void customerPage(MYSQL* conn);
 
 #endif // !CONTROLLER_H

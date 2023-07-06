@@ -6,7 +6,7 @@ MYSQL* CreateConnection(const char* basename) {
     if (!mysql_real_connect(conn, "localhost", "root", "2328", basename, 3306, NULL, 0)) {
         printf("\nERR: CONNECTION FAILED\n");
         conn = mysql_init(NULL);
-        if (mysql_real_connect(conn, "localhost", "root", "2328", "market_managment", 3306, NULL, 0)) {
+        if (mysql_real_connect(conn, "localhost", "root", "2328", "mysql", 3306, NULL, 0)) {
             char query[50] = "CREATE DATABASE";
             char use[50] = "USE";
             AddTab(use, basename);

@@ -13,8 +13,19 @@
 int main() {
 	MYSQL* conn = CreateConnection("market_managment");
 
-	//测试登录数据库获取以及输入字段匹配
-	SysLogin(conn);
+	// 登录数据库获取以及输入字段匹配
+	int userType = SysLogin(conn);
+	//在副作用中完成登录IO，返回值为2代表管理员登录，返回值为1代表用户登录
+	switch (userType) {
+	case 1:
+		customerPage(conn);
+		break;
+	case 2:
+		break;
+	default:
+		PrintfInMiddle("ERROR");
+		break;
+	}
 
 	//商品总销售额
 	//ProductSelling(conn);
